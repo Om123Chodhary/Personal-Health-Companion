@@ -1,14 +1,18 @@
-// PHC — Constants
+// ⭐ Dynamic API URL — production (Render) vs development (local)
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-// API endpoints
-export const API_BASE = 'http://localhost:8000';
+// WebSocket URL — auto-convert http → ws, https → wss
+const WS_BASE = API_BASE.replace('https://', 'wss://').replace('http://', 'ws://');
+
+// Export API endpoints
+export const API_BASE_URL = API_BASE;
 export const API_RISK = `${API_BASE}/api/risk/current`;
 export const API_ENV = `${API_BASE}/api/environment/current`;
 export const API_SCENARIO_LIST = `${API_BASE}/api/scenario/list`;
 export const API_SCENARIO_ACTIVATE = `${API_BASE}/api/scenario/activate`;
 export const API_EMERGENCY_SOS = `${API_BASE}/api/emergency/sos`;
 export const API_PRIVACY = `${API_BASE}/api/privacy/status`;
-export const WS_LIVE = 'ws://localhost:8000/ws/live';
+export const WS_LIVE = `${WS_BASE}/ws/live`;
 
 // Risk levels
 export const RISK_LEVELS = {
@@ -30,31 +34,11 @@ export const FACTOR_LABELS = {
 
 // Scenario info
 export const SCENARIOS = {
-  normal: {
-    label: 'Normal Day',
-    icon: 'sun',
-    color: 'emerald',
-  },
-  heatwave: {
-    label: 'Heatwave',
-    icon: 'thermometer',
-    color: 'orange',
-  },
-  pollution: {
-    label: 'Pollution',
-    icon: 'wind',
-    color: 'yellow',
-  },
-  fall: {
-    label: 'Fall Emergency',
-    icon: 'alert-triangle',
-    color: 'red',
-  },
-  offline: {
-    label: 'Offline Mode',
-    icon: 'wifi-off',
-    color: 'gray',
-  },
+  normal: { label: 'Normal Day', icon: 'sun', color: 'emerald' },
+  heatwave: { label: 'Heatwave', icon: 'thermometer', color: 'orange' },
+  pollution: { label: 'Pollution', icon: 'wind', color: 'yellow' },
+  fall: { label: 'Fall Emergency', icon: 'alert-triangle', color: 'red' },
+  offline: { label: 'Offline Mode', icon: 'wifi-off', color: 'gray' },
 };
 
 // Navigation items
